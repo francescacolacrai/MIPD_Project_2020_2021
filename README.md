@@ -1,4 +1,7 @@
+***
+***
 # PYTHON
 
 ## **INTRODUZIONE**
-Questa repository contiene vari esercizi svolti in linguaggio **Python**.
+This repository contains several excercises made using **Python** language.
+
