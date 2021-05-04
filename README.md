@@ -1,5 +1,5 @@
 ***
 ***
-## **INTRODUZIONE**
-This repository contains several excercises made using **Python** language.
+## **INTRODUCTION**
+This repository contains all the stuffs made using **Python** language and **MATLAB** environment for the project of **MIPD**.
 
