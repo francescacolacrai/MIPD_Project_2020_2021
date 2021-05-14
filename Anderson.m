@@ -35,30 +35,26 @@ fprintf('\n');
 
 WN = WN(:)'; %trasposto per il calcolo successivo di gamma
 
+%massimo valore del ritardo
+M = tau_max;
+
 %beta si può ottenere tramite il comando 'norminv' che ci permette di avere
 %il valore dell'ascissa che assume la distribuzione in corrispondenza del
 %valore 'alpha/2'
-alpha = 0.05;
+beta = abs(norminv(alpha/2));
+fprintf('\n');
+fprintf('Il coefficiente beta è: \n');
+fprintf('%f', beta);
+fprintf('\n');
 
 %controllo livello di significatività alpha
 if alpha <= 0 || alpha >= 1
     error('***Il livello di significatività deve appartenere a (0,1)!***');
     return;
 end
-beta = abs(norminv(alpha/2));
-%beta = sqrt(2) * erfcinv(alpha);
-
-fprintf('\n');
-fprintf('Il coefficiente beta è: \n');
-fprintf('%f', beta);
-fprintf('\n');
-
-%massimo valore del ritardo
-M = tau_max;
 
 %Calcolo una stima della covarianza campionaria
 %gamma = zeros(tau_max+1,1);
-
 for t=0:M
     gamma(t+1)=WN(1:M-t)*WN(1+t:M)';
 end
