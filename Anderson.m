@@ -54,13 +54,13 @@ fprintf('%f', beta);
 fprintf('\n');
 
 %massimo valore del ritardo
-tau_max = 30;
+M = tau_max;
 
 %Calcolo una stima della covarianza campionaria
 %gamma = zeros(tau_max+1,1);
 
-for t=0:tau_max
-    gamma(t+1)=WN(1:tau_max-t)*WN(1+t:tau_max)';
+for t=0:M
+    gamma(t+1)=WN(1:M-t)*WN(1+t:M)';
 end
 
 fprintf('\nGamma vale: \n');
@@ -72,7 +72,7 @@ fprintf('\n');
 rho = gamma / gamma(1); 
 
 %estremo dell'intervallo di confidenza 
-estremo = beta/sqrt(tau_max);
+estremo = beta/sqrt(M);
 fprintf('\nGli estremi di intervallo di confidenza sono: \n');
 fprintf('%f', -estremo);
 fprintf(' e ');
@@ -81,7 +81,7 @@ fprintf('\n');
 
 %grafico della stima di covarianza ottenuta
 figure('Name','Stima della covarianza campionaria normalizzata')
-indice=0:tau_max;
+indice=0:M;
 plot(indice,rho,'Color',[0.252 0.638 0.7],'LineWidth',1);
 hold on;
 sup = yline(estremo,'Color',[0.752 0.438 0.4],'LineWidth',1);
@@ -104,7 +104,7 @@ fprintf('%d', out);
 fprintf('\n');
 
 %verifico se il test è bianco oppure no
-if (out/tau_max) < alpha
+if (out/M) < alpha
     anderson = 'Il segnale generato WN è BIANCO';
 else 
     anderson = 'Il segnale generato WN NON è BIANCO';
