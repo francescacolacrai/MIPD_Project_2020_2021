@@ -9,6 +9,13 @@ Gli argomenti della funzione sono rispettivamente 'WN', 'alpha' e 'tau_max'
 %}
 function anderson = Anderson(~,~,~)
 
+%{
+%generazione rumore
+media = 3;
+lambda = 3;
+rumore = media + lambda * randn(1,50);
+%}
+
 load('workspace_generazione.mat','WN');
 
 %controllo ingressi della funzione
@@ -41,6 +48,7 @@ M = tau_max;
 %beta si può ottenere tramite il comando 'norminv' che ci permette di avere
 %il valore dell'ascissa che assume la distribuzione in corrispondenza del
 %valore 'alpha/2'
+alpha = 0.05;
 beta = abs(norminv(alpha/2));
 fprintf('\n');
 fprintf('Il coefficiente beta è: \n');
@@ -50,13 +58,12 @@ fprintf('\n');
 %controllo livello di significatività alpha
 if alpha <= 0 || alpha >= 1
     error('***Il livello di significatività deve appartenere a (0,1)!***');
-    return;
 end
 
 %Calcolo una stima della covarianza campionaria
 %gamma = zeros(tau_max+1,1);
-for t=0:M
-    gamma(t+1)=WN(1:M-t)*WN(1+t:M)';
+for t = 0:M
+    gamma(t+1) = WN(1:M-t) * WN(1+t:M)';
 end
 
 fprintf('\nGamma vale: \n');
@@ -90,7 +97,8 @@ grid on;
 
 %Calcolo dei valori che cadono al di fuori dell'intervallo dato
 out = 0;
-if abs(rho) > estremo
+for i = 1 : length(rho)
+if abs(rho(i)) > estremo
 out = out + 1;
 end 
 
