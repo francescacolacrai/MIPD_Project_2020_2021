@@ -11,6 +11,19 @@ function anderson = Anderson(~,~,~)
 
 load('workspace_generazione.mat','WN');
 
+%controllo ingressi della funzione
+if nargin < 3
+   tau_max = 30;
+end
+
+if tau_max >= length(WN)
+   tau_max = length(WN)-1;
+end
+
+if nargin < 2
+  alpha = 0.05;
+end
+
 %verifico media e varianza
 fprintf('\n');
 fprintf('La media di WN e: \n');
@@ -26,6 +39,12 @@ WN = WN(:)'; %trasposto per il calcolo successivo di gamma
 %il valore dell'ascissa che assume la distribuzione in corrispondenza del
 %valore 'alpha/2'
 alpha = 0.05;
+
+%controllo livello di significatività alpha
+if alpha <= 0 || alpha >= 1
+    error('***Il livello di significatività deve appartenere a (0,1)!***');
+    return;
+end
 beta = abs(norminv(alpha/2));
 %beta = sqrt(2) * erfcinv(alpha);
 
