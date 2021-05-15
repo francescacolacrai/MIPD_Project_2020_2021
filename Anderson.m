@@ -98,9 +98,10 @@ grid on;
 %Calcolo dei valori che cadono al di fuori dell'intervallo dato
 out = 0;
 for i = 1 : length(rho)
-if abs(rho(i)) > estremo
-out = out + 1;
-end 
+   if abs(rho(i)) > estremo
+      out = out + 1;
+   end
+end
 
 fprintf('\n');
 fprintf('Il numero dei valori che cadono al di fuori è: \n');
