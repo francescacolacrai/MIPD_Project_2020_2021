@@ -59,9 +59,9 @@ def Anderson(rumore,alpha,tau_max) :
 
     #grafico della covarianza appena ottenuta
     plt.figure('Stima della covarianza campionaria normalizzata')
-    for i in range (tau_max+1) :
+    #for i in range (tau_max+1) :
         #plt.plot(i, Rho(rumore,tau_max), linewidth=1.5)
-        plt.plot(range(0,tau_max+1),Rho(rumore,tau_max))
+    plt.plot(range(0,tau_max+1),Rho(rumore,tau_max))
     sup = plt.axhline(estremo, xmin=0, xmax=tau_max)
     inf = plt.axhline(-estremo, xmin=0, xmax=tau_max)
     plt.title('Grafico di una stima di covarianza campionaria normalizzata \n' r'$\mathbf{\hat\rho(\tau)}$', fontweight='bold')
