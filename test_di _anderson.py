@@ -15,8 +15,7 @@ from segnale import gauss
 #dev = np.sqrt(var)
 #signal = media + dev * np.random.randn(10000)
 
-#Numero di campioni
-#N = gauss.size 
+#Trasposto del segnale per il calcolo della covarianza campionaria
 gauss_t = gauss.transpose()
 
 #Scelgo il valore del livello di confidenza alpha
@@ -34,7 +33,6 @@ def Anderson(rumore,tau_max=30,alpha=0.05) :
         
     #Determino il parametro beta: 
     #forniamo 'alpha/2' perché consideriamo la singola coda (l'area complessiva delle due code è 5)
-    #beta = abs(np.quantile(gauss, alpha/2))
     beta = abs(nm.ppf(alpha/2))
     print ('Il parametro beta vale: \n', round(beta,6)) 
 
@@ -62,8 +60,6 @@ def Anderson(rumore,tau_max=30,alpha=0.05) :
 
     #grafico della covarianza appena ottenuta
     plt.figure('Stima della covarianza campionaria normalizzata')
-    #for i in range (tau_max+1) :
-        #plt.plot(i, Rho(rumore,tau_max), linewidth=1.5)
     plt.plot(range(0,tau_max+1), Rho(rumore,tau_max), color='darkcyan', \
              label='Stima della covarianza campionaria ' r'$\hat\rho(\tau)$', linewidth=1.5)
     #Estremo superiore dell'intervallo di confidenza
