@@ -11,9 +11,9 @@ function anderson = Anderson(~,~,~)
 
 %{
 %generazione rumore
-media = 3;
-lambda = 3;
-rumore = media + lambda * randn(1,50);
+media = 2;
+lambda = 2;
+rumore = media + lambda * randn(1,10000);
 %}
 
 load('workspace_generazione.mat','WN');
@@ -63,9 +63,8 @@ end
 %Calcolo una stima della covarianza campionaria
 %gamma = zeros(tau_max+1,1);
 for t = 0:M
-    gamma(t+1) = WN(1:M-t) * WN(1+t:M)';
+    gamma(t+1) = (WN(1:M-t) * WN(1+t:M)');
 end
-
 fprintf('\nGamma vale: \n');
 fprintf('%f', gamma);
 fprintf('\n');
@@ -73,7 +72,8 @@ fprintf('\n');
 %Calcolo di una stima della varianza campionaria normalizzata:
 %gamma(1) = una stima della varianza di WN
 rho = gamma / gamma(1); 
-
+fprintf('\n Rho vale: \n');
+fprintf('%f',rho)
 %estremo dell'intervallo di confidenza 
 estremo = beta/sqrt(M);
 fprintf('\nGli estremi di intervallo di confidenza sono: \n');
@@ -92,15 +92,19 @@ inf = yline(-estremo,'Color',[0.752 0.798 0.2],'LineWidth',1);
 hold off;
 title('Grafico di una stima di \rho(\tau)');
 xlabel('Ritardo \tau');
-ylabel('\rho(\tau)');
+ylabel('Stima di \rho(\tau)');
+legend('Stima della covarianza campionaria $\hat\rho(\tau)$', ...
+'Estremo superiore di $(-\frac{\beta}{\sqrt{\tau_{max}}},\frac{\beta}{\sqrt{\tau_{max}}})$', ...
+'Estremo inferiore di $(-\frac{\beta}{\sqrt{\tau_{max}}},\frac{\beta}{\sqrt{\tau_{max}}})$', ...
+'Interpreter','latex','FontSize',14);
 grid on;
 
 %Calcolo dei valori che cadono al di fuori dell'intervallo dato
 out = 0;
 for i = 1 : length(rho)
-   if abs(rho(i)) > estremo
-      out = out + 1;
-   end
+    if abs(rho(i)) > estremo
+        out = out + 1;
+    end 
 end
 
 fprintf('\n');
