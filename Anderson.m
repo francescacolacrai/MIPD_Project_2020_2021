@@ -1,3 +1,4 @@
+function esito = Anderson(segnale)
 %{
 --------------------------------------
 TEST DI BIANCHEZZA SUL RUMORE GENERATO
@@ -7,24 +8,28 @@ generato in precedenza sia effettivamente bianco.
 
 Gli argomenti della funzione sono rispettivamente 'WN', 'alpha' e 'tau_max'
 %}
-function anderson = Anderson(~,~,~)
+
+%load('workspace_generazione.mat','WN');
+%segnale = WN;
+
+%Anderson(segnale,0.05,30)
 
 %{
-%generazione rumore
+%generazione rumore di prova
 media = 2;
 lambda = 2;
 rumore = media + lambda * randn(1,10000);
 %}
 
-load('workspace_generazione.mat','WN');
+%load('workspace_generazione.mat','WN');
 
 %controllo ingressi della funzione
 if nargin < 3
    tau_max = 30;
 end
 
-if tau_max >= length(WN)
-   tau_max = length(WN)-1;
+if tau_max >= length(segnale)
+   tau_max = length(segnale)-1;
 end
 
 if nargin < 2
@@ -33,14 +38,14 @@ end
 
 %verifico media e varianza
 fprintf('\n');
-fprintf('La media di WN e: \n');
-fprintf('%f', mean(WN));
+fprintf('La media è: \n');
+fprintf('%f', mean(segnale));
 fprintf('\n \n');
-fprintf('La varianza di WN e: \n');
-fprintf('%f', var(WN));
+fprintf('La varianza è: \n');
+fprintf('%f', var(segnale));
 fprintf('\n');
 
-WN = WN(:)'; %trasposto per il calcolo successivo di gamma
+segnale = segnale(:)'; %trasposto per il calcolo successivo di gamma
 
 %massimo valore del ritardo
 M = tau_max;
@@ -61,19 +66,20 @@ if alpha <= 0 || alpha >= 1
 end
 
 %Calcolo una stima della covarianza campionaria
-%gamma = zeros(tau_max+1,1);
+gamma = zeros(tau_max+1,1);
 for t = 0:M
-    gamma(t+1) = (WN(1:M-t) * WN(1+t:M)');
+    gamma(t+1) = (segnale(1:M-t) * segnale(1+t:M)');
 end
 fprintf('\nGamma vale: \n');
 fprintf('%f', gamma);
 fprintf('\n');
 
-%Calcolo di una stima della varianza campionaria normalizzata:
+%Calcolo di una stima della covarianza campionaria normalizzata:
 %gamma(1) = una stima della varianza di WN
 rho = gamma / gamma(1); 
 fprintf('\n Rho vale: \n');
 fprintf('%f',rho)
+
 %estremo dell'intervallo di confidenza 
 estremo = beta/sqrt(M);
 fprintf('\nGli estremi di intervallo di confidenza sono: \n');
@@ -102,20 +108,20 @@ grid on;
 %Calcolo dei valori che cadono al di fuori dell'intervallo dato
 out = 0;
 for i = 1 : length(rho)
-    if abs(rho(i)) > estremo
+    if abs(rho(i)) > estremo 
         out = out + 1;
     end 
 end
 
 fprintf('\n');
 fprintf('Il numero dei valori che cadono al di fuori è: \n');
-fprintf('%d', out);
+fprintf('%d', out-1);
 fprintf('\n');
 
 %verifico se il test è bianco oppure no
 if (out/M) < alpha
-    anderson = 'Il segnale generato WN è BIANCO';
+    esito = 'Il segnale generato è BIANCO';
 else 
-    anderson = 'Il segnale generato WN NON è BIANCO';
+    esito = 'Il segnale generato NON è BIANCO';
 end
 end
