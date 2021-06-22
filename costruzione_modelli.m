@@ -190,3 +190,133 @@ incertezza_max_531 = max(abs(incertezza531));
 incertezza521 = (st_dev_521 ./ v_521)*100;
 incertezza_max_521 = max(abs(incertezza521));
 %}
+
+
+
+%______________MODELLI ARMAX______________%
+
+
+%ERRORE DI PREDIZIONE 
+errore3342 = pe(amx3342,[y1_id u_id]);
+errore3331 = pe(amx3331,[y1_id u_id]);
+errore3332 = pe(amx3332,[y1_id u_id]);
+errore3341 = pe(amx3341,[y1_id u_id]);
+errore3351 = pe(amx3351,[y1_id u_id]);
+errore3352 = pe(amx3352,[y1_id u_id]);
+errore4352 = pe(amx4352,[y1_id u_id]);
+errore4351 = pe(amx4351,[y1_id u_id]);
+errore4431 = pe(amx4431,[y1_id u_id]);
+errore4432 = pe(amx4432,[y1_id u_id]);
+errore4441 = pe(amx4441,[y1_id u_id]);
+errore4341 = pe(amx4341,[y1_id u_id]);
+errore4331 = pe(amx4331,[y1_id u_id]);
+errore4342 = pe(amx4342,[y1_id u_id]);
+errore4442 = pe(amx4442,[y1_id u_id]);
+errore4451 = pe(amx4451,[y1_id u_id]);
+errore4452 = pe(amx4452,[y1_id u_id]);
+errore4332 = pe(amx4332,[y1_id u_id]);
+errore4322 = pe(amx4322,[y1_id u_id]);
+
+%ANDERSON
+%{
+Anderson(errore3342);
+Anderson(errore3331);
+Anderson(errore3332);
+Anderson(errore3341);
+Anderson(errore3351);
+Anderson(errore3352);
+Anderson(errore4352);
+Anderson(errore4351);
+Anderson(errore4431);
+Anderson(errore4432);
+Anderson(errore4441);
+Anderson(errore4341);
+Anderson(errore4331);
+Anderson(errore4342);
+Anderson(errore4442);
+Anderson(errore4451);
+Anderson(errore4452);
+Anderson(errore4332);
+Anderson(errore4322);
+%}
+
+%INCERTEZZA COEFFICIENTI
+
+[v_3342, st_dev_3342] = getpvec(amx3342);
+incertezza3342 = (st_dev_3342 ./ v_3342)*100;
+incertezza_max_3342 = max(abs(incertezza3342));
+
+[v_3331, st_dev_3331] = getpvec(amx3331);
+incertezza3331 = (st_dev_3331 ./ v_3331)*100;
+incertezza_max_3331 = max(abs(incertezza3331));
+
+[v_3332, st_dev_3332] = getpvec(amx3332);
+incertezza3332 = (st_dev_3332 ./ v_3332)*100;
+incertezza_max_3332 = max(abs(incertezza3332));
+
+[v_3341, st_dev_3341] = getpvec(amx3341);
+incertezza3341 = (st_dev_3341 ./ v_3341)*100;
+incertezza_max_3341 = max(abs(incertezza3341));
+
+[v_3351, st_dev_3351] = getpvec(amx3351);
+incertezza3351 = (st_dev_3351 ./ v_3351)*100;
+incertezza_max_3351 = max(abs(incertezza3351));
+
+[v_3352, st_dev_3352] = getpvec(amx3352)
+incertezza3352 = (st_dev_3352 ./ v_3352)*100
+incertezza_max_3352 = max(abs(incertezza3352))
+
+[v_4351, st_dev_4351] = getpvec(amx4351);
+incertezza4351 = (st_dev_4351 ./ v_4351)*100;
+incertezza_max_4351 = max(abs(incertezza4351));
+
+[v_4431, st_dev_4431] = getpvec(amx4431);
+incertezza4431 = (st_dev_4431 ./ v_4431)*100;
+incertezza_max_4431 = max(abs(incertezza4431));
+
+[v_4432, st_dev_4432] = getpvec(amx4432);
+incertezza4432 = (st_dev_4432 ./ v_4432)*100;
+incertezza_max_4432 = max(abs(incertezza4432));
+
+[v_4441, st_dev_4441] = getpvec(amx4441);
+incertezza4441 = (st_dev_4441 ./ v_4441)*100;
+incertezza_max_4441 = max(abs(incertezza4441));
+
+[v_4341, st_dev_4341] = getpvec(amx4341);
+incertezza4341 = (st_dev_4341 ./ v_4341)*100;
+incertezza_max_4341 = max(abs(incertezza4341));
+
+[v_4331, st_dev_4331] = getpvec(amx4331);
+incertezza4331 = (st_dev_4331 ./ v_4331)*100;
+incertezza_max_4331 = max(abs(incertezza4331));
+
+[v_4342, st_dev_4342] = getpvec(amx4342);
+incertezza4342 = (st_dev_4342 ./ v_4342)*100;
+incertezza_max_4342 = max(abs(incertezza4342));
+
+[v_4442, st_dev_4442] = getpvec(amx4442);
+incertezza4442 = (st_dev_4442 ./ v_4442)*100;
+incertezza_max_4442 = max(abs(incertezza4442));
+
+[v_4451, st_dev_4451] = getpvec(amx4451);
+incertezza4451 = (st_dev_4451 ./ v_4451)*100;
+incertezza_max_4451 = max(abs(incertezza4451));
+
+[v_4452, st_dev_4452] = getpvec(amx4452);
+incertezza4452 = (st_dev_4452 ./ v_4452)*100;
+incertezza_max_4452 = max(abs(incertezza4452));
+
+[v_4332, st_dev_4332] = getpvec(amx4332);
+incertezza4332 = (st_dev_4332 ./ v_4332)*100;
+incertezza_max_4332 = max(abs(incertezza4332));
+
+[v_4322, st_dev_4322] = getpvec(amx4322);
+incertezza4322 = (st_dev_4322 ./ v_4322)*100;
+incertezza_max_4322 = max(abs(incertezza4322));
+
+
+
+
+
+
+
