@@ -30,7 +30,7 @@ switch scelta
         n_model = size(modello);
 
         % so che l'ARX è dato da y(t) = [B(z)/A(z)]*u(t-1) + [1/A(z)]*xi(t) e 
-        % B(z)/A(z) deve essere strettamente propria
+        % B(z)/A(z) deve essere propria
         idx = find(modello(:,2) > modello(:,1));
         modello(idx,:) = [];
         n_model = size(modello);
