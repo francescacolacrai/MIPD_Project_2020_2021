@@ -7,10 +7,10 @@ load('ES_4.MAT');
 %per la validazione
 u_id = es4_u(1:150);
 u_val = es4_u(151:301);
-y1_id = es4_y1(1:150);
-y1_val = es4_y1(151:301);
-dati_id = [y1_id u_id];
-dati_val = [y1_val u_val];
+y5_id = es4_y5(1:150);
+y5_val = es4_y5(151:301);
+dati_id = [y5_id u_id];
+dati_val = [y5_val u_val];
 
 %elimino la media dai dati
 dati_id_detrend = detrend(dati_id);
@@ -30,7 +30,7 @@ switch scelta
         n_model = size(modello);
 
         % so che l'ARX è dato da y(t) = [B(z)/A(z)]*u(t-1) + [1/A(z)]*xi(t) e 
-        % B(z)/A(z) deve essere propria
+        % B(z)/A(z) deve essere strettamente propria
         idx = find(modello(:,2) > modello(:,1));
         modello(idx,:) = [];
         n_model = size(modello);
@@ -79,8 +79,8 @@ switch scelta
 
         % so che l'ARMAX è dato da y(t) = [B(z)/A(z)]*u(t-1) + [C(z)/A(z)]*xi(t) e 
         % B(z)/A(z) deve essere propria
-        idx_b = find(modello(:,2) > modello(:,1));
-        modello(idx_b,:) = [];
+        idx = find(modello(:,2) > modello(:,1));
+        modello(idx,:) = [];
         n_model = size(modello)
         fprintf("I modelli nell'intorno dell'ordine appena trovato sono: \n");
         disp(modello);
@@ -98,7 +98,7 @@ switch scelta
             fprintf(',')
             fprintf("%d",modello(i,4));
             fprintf(")\n");
-            theta = armax(dati_id_detrend,[modello(i,1),modello(i,2),modello(i,3),modello(i,4)]); %creo il modello
+            theta = armax(dati_id_detrend,[modello(i,1),modello(i,2),modello(i,3),modello(i,4)]) %creo il modello
             Errore_id_armax(theta,dati_id_detrend,modello(i,1),modello(i,2),modello(i,3),modello(i,4));
             inc_max = Incertezza_Coefficienti(theta);
             Incertezza_max(i) = inc_max;
